@@ -1,0 +1,28 @@
+# cp ./foreman.service /lib/systemd/system/foreman.service
+# chmod 644 /lib/systemd/system/foreman.service
+# Don't forget #!/usr/bin/python
+# chmod +x ./ForemanServ.py
+# systemctl daemon-reload
+# systemctl enable foreman.service
+# systemctl start foreman.service
+# Status:
+# systemctl status foreman.service
+# Stop:
+# systemctl stop foreman.service
+# Remove:
+# systemctl disable foreman.service
+
+[Unit]
+Description=foreman
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bots/Foreman/Foreman.py
+WorkingDirectory=/bots/Foreman/
+Restart=always
+RestartSec=600
+
+[Install]
+WantedBy=multi-user.target
