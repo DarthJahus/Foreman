@@ -38,6 +38,8 @@ the miner (process) or execute a customized bash script on their machine
 
 ## Usage
 
+Before going forward, please send `/start` to **[@ContremaitreBot](https://t.me/ContremaitreBot)** on Telegram.
+
 ### 1. Configuration
 
 In your configuration file, you have to set the following parameters:
