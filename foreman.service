@@ -1,7 +1,6 @@
 # cp ./foreman.service /lib/systemd/system/foreman.service
 # chmod 644 /lib/systemd/system/foreman.service
-# Don't forget #!/usr/bin/python
-# chmod +x ./ForemanServ.py
+# chmod +x ./Foreman.py
 # systemctl daemon-reload
 # systemctl enable foreman.service
 # systemctl start foreman.service
