@@ -1,0 +1,20 @@
+{
+	"user": {
+		"id": "12345678",
+		"key": "Rig1:123456789",
+		"server": "https://such.server.org:8081/report"
+	},
+	"miner": {
+		"ip": "127.0.0.1",
+		"port": 3333,
+		"pass": "12345"
+	},
+	"params": {
+		"uptime_min": 60,
+		"failure_min": 300,
+		"PERF_LESS_THAN": 109000,
+		"UNIT_COUNT_LESS_THAN": 5,
+		"UNIT_PERF_LESS_THAN": [28000, 28000, 28000, 27000, 9500, 9500],
+		"UNIT_TEMP_GREATER_THAN": [83]
+	}
+}
