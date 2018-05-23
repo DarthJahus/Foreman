@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foreman-readme</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="foreman-0.4-closed-beta">Foreman 0.4 (closed beta)</h1>
+<p><em>Monitor your rigs on Telegram.</em></p>
+<h2 id="functions">Functions</h2>
+<p><strong>Foreman</strong> is a client/server software that allows you to monitor your mining rig performances right on Telegram.</p>
+<ul>
+<li>
+<p><strong>Active dashboard:</strong> A dashboard will always be waiting for you when you enter the chat with Foreman. The dashboard is updated every now and then, allowing you to monitor global hashrate and GPU hashrate, temperature and fan speed.</p>
+</li>
+<li>
+<p><strong>Timeout alerts:</strong> If your rig doesn’t report for some time, the bot sends you an alert, letting you know for how long your machine has been inactive.</p>
+</li>
+<li>
+<p><strong>⭐ Advanced alerts:</strong> <em>Premium</em> users can set customized alerts based on thresholds for global hashrate, GPU failure, GPU hashrate and temperature.</p>
+</li>
+<li>
+<p><strong>⭐ Remote commands:</strong> In case of failure, <em>Premium</em> users can restart the miner (process) or execute a customized bash script on their machine<br>
+(allowing, but not limiting, them to reboot or turn off the machine).</p>
+</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p>Rig must be running <strong>Claymore</strong> miner</p>
+</li>
+<li>
+<p>Claymore configuration should <strong>allow remote monitoring</strong>:</p>
+<blockquote>
+<p><code>-mport 3333</code> sets the monitoring port to <code>3333</code> and activates remote control.<br>
+If you are not going to use remote commands, you can set it to <code>-3333</code> to activate monitoring<br>
+but disable remote control.</p>
+<p><code>-mpsw pass</code> sets a password for remote monitoring and control.</p>
+</blockquote>
+</li>
+<li>
+<p>You must have a Telegram account</p>
+</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>Before going forward, please send <code>/start</code> to <strong><a href="https://t.me/ContremaitreBot">@ContremaitreBot</a></strong> on Telegram.</p>
+<h3 id="configuration">1. Configuration</h3>
+<p>In your configuration file, you have to set the following parameters:</p>
+<p><code>user: id:</code> The identifier of your Telegram account. To know your identifier, simply send <code>/user_id</code> to Foreman, in private.</p>
+<p><code>user: key:</code> Your secret licence key. Has to be in the form: <code>"RigName:Key"</code> (example: <code>"RigA:123456789"</code>).</p>
+<p><code>user: server:</code> This is the server your rig will be reporting to. Default value has to be used, unless stated otherwise.</p>
+<p><code>miner: ip:</code> The IP address of your miner on local area network.<br>
+If the software is running on the same machine as the miner, <code>"127.0.0.1"</code> can be used.</p>
+<p><code>miner: port:</code> The port on which your mining software allowed monitoring,<br>
+as set in your miner configuration file (by default, Claymore uses port <code>3333</code>).</p>
+<p><code>params: uptime_min:</code> This is the minimum uptime of your rig <em>before</em> the software starts checking for timeout or failures.<br>
+The minimum value you can set is <code>60</code> seconds.</p>
+<p><code>params: failure_min:</code> Time to wait for your machine to report.<br>
+Passed this time, a <code>TIMEOUT</code> alert will be sent.<br>
+The minimum value you can set is <code>180</code> seconds (3 minutes).<br>
+Recommended and default value is <code>300</code> seconds (5 minutes).</p>
+<p>⭐ <code>params: PERF_LESS_THAN:</code> The desired minimum total hashrate of your rig. This is for primary mining only (not dual).<br>
+Value should be in kH/s (example: if your rig operates at 120 MH/s,<br>
+and you want to be alerted if it performs at less than 115 MH/s, set this parameter to <code>115000</code> kH/s).<br>
+When your rig doesn’t perform as well as your desired value, an alert is sent, with options to restart miner or reboot the machine.</p>
+<p>⭐ <code>params: UNIT_COUNT_LESS_THAN:</code> Number of operating GPU in your rig (primary mining only).<br>
+If you have 6 GPU in your rig, you may want to set the value to <code>6</code>. This way, if any GPU fails,<br>
+an alert would be sent to you. If one or more of your units constantly fail, and you want to avoid receiving this alert often, set it to the number of units that don’t usually fail. You get the idea :)<br>
+When this error is raised, an alert is sent, with options to restart miner or reboot the machine.</p>
+<p>⭐ <code>params: UNIT_PERF_LESS_THAN:</code> Array of one or more minimum hashrate values for your units.<br>
+This is for primary mining only (dual mining is not supported).<br>
+You can set one value for all your GPU units (example: <code>[28000]</code>),<br>
+or set a custom value for each unit (example: <code>[28000, 28000, 28000, 27000, 9500, 9500]</code>).<br>
+When a unit’s performance is below the threshold,<br>
+an alert is sent, with options to restart miner or reboot the machine.</p>
+<p>⭐ <code>params: UNIT_TEMP_GREATER_THAN:</code> Array of one or more temperature threshold values for your units.<br>
+You can set one value for all your units (example: <code>[83]</code> for 83 °C),<br>
+or set a custom value for each GPU unit (example: <code>[75, 75, 75, 80, 83, 83]</code>).</p>
+<p><em>Parameters marked with a star (⭐) are for <strong>Premium</strong> users only.</em></p>
+<h3 id="launch-the-software-at-startup">2. Launch the software at startup</h3>
+<p><strong>Windows</strong></p>
+<p>Easily create a shortcut to this software and store it inside <code>%AppData%\Microsoft\Windows\Start Menu\Startup</code></p>
+<p>You can edit the shortcut’s properties to make it launch minimized, as you can change fond and window size.</p>
+<p><strong>Linux</strong></p>
+<p>A <code>.service</code> file is provided.</p>
+<p>Follow these steps, <em>as super user (<code>sudo -s</code>)</em>, <em>inside the program folder</em>, to register it:</p>
+<ol>
+<li><code>cp ./foreman.service /lib/systemd/system/foreman.service</code></li>
+<li><code>chmod 644 /lib/systemd/system/foreman.service</code></li>
+<li><code>chmod +x Foreman.py</code></li>
+<li><code>systemctl daemon-reload</code></li>
+<li><code>systemctl enable foreman.service</code></li>
+<li><code>systemctl start foreman.service</code></li>
+</ol>
+<p>To check service status, run: <code>systemctl status foreman.service</code></p>
+<p>To stop the software, run: <code>systemctl stop foreman.service</code></p>
+<p>To remove the service, run: <code>systemctl disable Foreman.service</code></p>
+<p>Feel free to geek and create your own service or change service settings.</p>
+<h3 id="telegram-bot">3. Telegram bot</h3>
+<p>The Telegram bot <em>is</em> your dashboard.<br>
+It will create a persistent message,<br>
+updated with the latest information from your machine.</p>
+<p>When an error occurs, an alert message is send to you in private.</p>
+<p>Error messages contain useful information about the state of your rig.<br>
+Although more information are on the dashboard, that stays up to date.</p>
+<p>Alert messages allow you to perform simple maintenance operations on your machine:</p>
+<ul>
+<li>
+<p><strong>Restart:</strong> This order will ask the miner (Claymore) to restart its thread.<br>
+It is the equivalent of closing the miner thread manually and launching it again.</p>
+</li>
+<li>
+<p><strong>Reboot:</strong> Executes a batch script on your machine.<br>
+The batch script has to be named <code>reboot.bat</code> on Windows and <code>reboot.sh</code> on Linux-based OS.<br>
+The script supposedly contains commands to <em>force</em> reboot your machine.<br>
+Although it can be used to force shut down, or perform more complex actions.<br>
+An example is provided with this software. <em>Geek it!</em></p>
+</li>
+</ul>
+<p><strong>A note on persistent dashboard:</strong><br>
+For an obscure reason, sometimes, Telegram disallows editing the persistent message.<br>
+When this happens, the bot will send you a message,<br>
+explaining the situation and allowing you to request a new dashboard message.</p>
+<p><strong>Other useful commands:</strong></p>
+<p><code>/reset_dashboards</code> will request a new dashboard for each rig. This can be used for <em>cleaning</em> purpose<br>
+(after clearing chat history with the bot, for example). Please, do not overuse it.</p>
+<p><code>/user_id</code> informs you of your Telegram unique identifier.<br>
+It can be useful to set up the configuration file or simply for your own usage.</p>
+<p><code>/help</code> A Help button will always be shown on your persistent dashboard.<br>
+However, you can still ask for help by sending the <code>/help</code> command.</p>
+<p><code>/about</code> Shows information about the bot, such as version and copyright.</p>
+<p><code>/licence</code> Shows information about licence keys and how to acquire a new licence.</p>
+<h2 id="licence-information">Licence information</h2>
+<p>The licence keys provided to you are personal. Keep them secret.</p>
+<p>Each machine requires a licence key.<br>
+If you have many rigs to monitor, request a key bundle.</p>
+<p>Requesting a licence key is actually done through a private message to the developer.<br>
+Before doing so, please use <code>/licence</code> in private with the bot.</p>
+<h2 id="legal">Legal</h2>
+<p>The <em>client</em> part of this software is distributed under the terms of The Unlicence and its code is made public.</p>
+<p>Even though we recommand <em>not</em> to change the behavior of this software, you are granted the freedom to edit it.<br>
+You can modify the way this software communicates with the miner, or even the way it executes the given restart and reboot orders.</p>
+<p>However, the API information will not be provided,<br>
+although it can be easily understood through the code.<br>
+We recommend sending a request every minute at most,<br>
+for sending successive fast requests would result in your IP being banned and your user keys being lost.</p>
+<p>The <em>Telegram Bot</em> and <em>server-side</em> software are proprietary software and fall under the Copyright law.</p>
+</div>
+</body>
+
+</html>
