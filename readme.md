@@ -42,6 +42,8 @@ Before going forward, please send `/start` to **[@ContremaitreBot](https://t.me/
 
 ### 1. Configuration
 
+**Note:** You can use **Foreman Config Assistant** ([download here](https://github.com/DarthJahus/Foreman/releases/download/0.4/Foreman.Config.Assistant.v0.2.exe)) to easily create your configuration file.
+
 In your configuration file, you have to set the following parameters:
 
 `user: id:` The identifier of your Telegram account. To know your

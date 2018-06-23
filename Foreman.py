@@ -6,6 +6,12 @@ import time, os
 from datetime import datetime
 import urllib3; urllib3.disable_warnings()
 
+# ToDo: Make sure that it works correctly on EthOS
+# > https://www.reddit.com/r/gpumining/comments/8q1hie/a_persistant_telegram_dashboard_for_claymore_with/e0k53qb/
+# ToDo: Adapt to more mining software: xmr-stak
+# > https://www.reddit.com/r/gpumining/comments/8q1hie/a_persistant_telegram_dashboard_for_claymore_with/e0hask4/
+# ToDo: Adapt to more mining software: PhoenixMiner
+# > tg:@IcedMilo
 
 # Constants
 __version__ = 0.4
