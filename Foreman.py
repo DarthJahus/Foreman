@@ -112,6 +112,7 @@ def try_send_data(data):
 	_message = "Unknown error"
 	while i < __max_tries:
 		try:
+			i += 1
 			_req = requests.post(
 				url=__config["user"]["server"],
 				data=json.dumps(_data),
@@ -128,8 +129,7 @@ def try_send_data(data):
 						clear_order = False
 					else:
 						execute_order(_order)
-			else:
-				i += 1
+			else:	
 				if i < __max_tries: time.sleep(int(__sleep_failure_min/__max_tries)+1)
 		except requests.exceptions.Timeout:
 			_message = "Connection timed out."
