@@ -132,10 +132,13 @@ def try_send_data(data):
 			else:	
 				if i < __max_tries: time.sleep(int(__sleep_failure_min/__max_tries)+1)
 		except requests.exceptions.Timeout:
+			time.sleep(int(__sleep_failure_min/__max_tries)+1)
 			_message = "Connection timed out."
 		except requests.ConnectionError:
+			time.sleep(int(__sleep_failure_min/__max_tries)+1)
 			_message = "Can not establish a connection with remote server."
 		except:
+			time.sleep(int(__sleep_failure_min/__max_tries)+1)
 			print("Unhandled error.")
 			_message = "Unhandled error."
 	# Return status
